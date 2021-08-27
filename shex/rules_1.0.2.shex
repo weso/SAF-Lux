@@ -2,7 +2,7 @@
 # 2021-08-02 Changed namespaces for afl, crm and efr
 # 2021-02-02 Added some annotations so we can generate RDFS vocabulary from this ShEx
 
-prefix afl:  <http://data.culture.lu/ns/saf/>
+prefix afl:  <http://data.culture.lu/ns/>
 prefix crm:  <http://www.cidoc-crm.org/cidoc-crm/>
 prefix efr:  <http://iflastandards.info/ns/fr/frbr/frbroo/>
 prefix edtf: <http://id.loc.gov/datatypes/edtf/>
@@ -10,75 +10,77 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix xsd:  <http://www.w3.org/2001/XMLSchema#>
 
+start = @afl:Person
+
 afl:Person {
-  rdf:type                        [ crm:E21_Person ]                ;  
+  rdf:type                        [ crm:E21_Person ]                ;
   crm:P1_is_identified_by         @afl:NameAppellation              ;
   crm:P98_was_born                @afl:BirthInformation           * ;
   crm:P100_died_in                @afl:DeathInformation           * ;
-  crm:P2_has_type                 @afl:Gender                     ? ; 
-  crm:P14i_performed              @afl:Profession                 * ; 
+  crm:P2_has_type                 @afl:Gender                     ? ;
+  crm:P14i_performed              @afl:Profession                 * ;
   crm:P14i_performed              @afl:Activity                   * ;
   crm:P3_has_note                 @afl:Note                       * ;
   crm:P48_has_prefered_identifier @afl:ExternalStandardIdentifier * ;
-  crm:P67i_is_refered_to_by       @afl:InternalStandardIdentifier * 
+  crm:P67i_is_refered_to_by       @afl:InternalStandardIdentifier *
 }
 
 # Administrative fields / Source of data (institution codes)
 afl:E89_Propositional_object {
     rdf:type                [ crm:E89_Propositional_object ] ;
     crm:P94i_was_created_by {
-        rdf:type [ crm:E65_Creation ] ;                                      
+        rdf:type [ crm:E65_Creation ] ;
         crm:P14_carried_out_by {
-            rdf:type [ crm:E39_Actor ]  ;                                    
+            rdf:type [ crm:E39_Actor ]  ;
             crm:P107_has_current_or_former_member_of  {
-                rdf:type   [  crm:E74_Group ]                                
+                rdf:type   [  crm:E74_Group ]
             }
         } +
     } + ;
 
     # Date of creation
-    crm:P94i_was_created_by {                                                 
-        rdf:type [ crm:E65_Creation ] ;                                      
+    crm:P94i_was_created_by {
+        rdf:type [ crm:E65_Creation ] ;
         crm:P4_has_time_span {
-            rdf:type  [ crm:E52_Time ]  ;                                    
-            afl:value edtf:EDTF         
+            rdf:type  [ crm:E52_Time ]  ;
+            afl:value edtf:EDTF
         }
     } ;
 
     # Date of modification
-    crm:P141i_was_assigned_by {                                                
-        rdf:type [ crm:E13_Attribute_assignment ] ;                          
+    crm:P141i_was_assigned_by {
+        rdf:type [ crm:E13_Attribute_assignment ] ;
         crm:P4_has_time_span {
-            rdf:type  [ crm:E52_Time ] ;                                      
+            rdf:type  [ crm:E52_Time ] ;
             afl:value edtf:EDTF
         } ;
-        
+
         # Author of modification
         crm:P14_carried_out_by {
-            rdf:type [ crm:E39_Actor ]                                       
+            rdf:type [ crm:E39_Actor ]
         } ;
 
     } * ;
 
     # Status of data
-    crm:P2_has_type {                                                        
+    crm:P2_has_type {
        rdf:type  [  crm:E55_Type ]  ;
        afl:value .
     }
 }
 
 afl:NameAppellation {
-    rdf:type                       [ crm:E41_Appellation ]           ;  
+    rdf:type                       [ crm:E41_Appellation ]           ;
     efr:R8_consists_of             @afl:Name                         ;
     efr:R8_consists_of             @afl:Numeration                 ? ;
-    efr:R8_consists_of             @afl:Title                      ? ; 
-    crm:P70i_is_documented_in      @afl:SourceOfInformation        * ; 
-    crm:P139_has_alternative_form  @afl:AlternativeNameAppellation * ; 
+    efr:R8_consists_of             @afl:Title                      ? ;
+    crm:P70i_is_documented_in      @afl:SourceOfInformation        * ;
+    crm:P139_has_alternative_form  @afl:AlternativeNameAppellation * ;
 }
 
 afl:NameType {
   rdf:type   [ crm:E55_Type ] ;
-  afl:value  @afl:CL3_Name_Format 
+  afl:value  @afl:CL3_Name_Format
 }
 
 afl:AlternativeNameAppellation {
@@ -86,7 +88,7 @@ afl:AlternativeNameAppellation {
   efr:R8_consists_of        @afl:AlternativeName            ? ;
   efr:R8_consists_of        @afl:AlternativeNumeration      ? ;
   efr:R8_consists_of        @afl:AlternativeTitle           ? ;
-  crm:P70i_is_documented_in @afl:SourceOfInformation        * ; 
+  crm:P70i_is_documented_in @afl:SourceOfInformation        * ;
 }
 
 afl:SourceOfInformation {
@@ -108,101 +110,101 @@ afl:CL2_Notes [
   1 # public note
 ]
 
-afl:CL3_Name_Format [ 
+afl:CL3_Name_Format [
     "0" # direct name form
     "1" # indirect name form
-] 
+]
 
-afl:CL4_Gender [ 
+afl:CL4_Gender [
     0 # not known
-    1 # male  
-    2 # female 
+    1 # male
+    2 # female
     9 # not applicable
 ]
 
 afl:Name {
-  rdf:type        [ crm:E90_Symbolic_Object ];  
+  rdf:type        [ crm:E90_Symbolic_Object ];
   afl:label       [ afl:name ]               ;
   crm:P2_has_type @afl:NameType              ;
   afl:value       xsd:string
 }
 
 afl:Numeration {
-  rdf:type   [ crm:E90_Symbolic_Object ];  
-  afl:label  [ afl:numeration ]         ; 
+  rdf:type   [ crm:E90_Symbolic_Object ];
+  afl:label  [ afl:numeration ]         ;
   afl:value .                              # roman numbers
 }
 
 afl:Title {
-  rdf:type   [ crm:E90_Symbolic_Object ];  
+  rdf:type   [ crm:E90_Symbolic_Object ];
   afl:label  [ afl:title ]              ;
   afl:value  xsd:string                 # free text, Filiation or associated titles
 }
 
-afl:AlternativeName {                                            
-  rdf:type        [ crm:E90_Symbolic_Object ];                       
+afl:AlternativeName {
+  rdf:type        [ crm:E90_Symbolic_Object ];
   afl:label       [ afl:alternativeName ]  ;
   afl:value       . ;
-  crm:P2_has_type @afl:NameType                                 
-} 
+  crm:P2_has_type @afl:NameType
+}
 
-afl:AlternativeNumeration {                                     
+afl:AlternativeNumeration {
   rdf:type   [ crm:E90_Symbolic_Object ]    ;
   afl:label  [ afl:alternativeNumeration ]  ;
   afl:value  .                          # Only roman numbers
-} 
+}
 
-afl:AlternativeTitle {                                          
+afl:AlternativeTitle {
   rdf:type   [ crm:E90_Symbolic_Object ] ;
   afl:label  [ afl:alternativeTitle    ] ;
-  afl:value  xsd:string                  
+  afl:value  xsd:string
 }
 
 afl:Place {
-  rdf:type [ crm:E53_Place ] ; 
+  rdf:type [ crm:E53_Place ] ;
 }
 
-afl:TimeSpan {  
+afl:TimeSpan {
   rdf:type [ crm:E52_Time-Span ] ;
 }
 
-afl:BirthInformation {                            
- rdf:type                  [ crm:E67_Birth ]    ; 
+afl:BirthInformation {
+ rdf:type                  [ crm:E67_Birth ]    ;
  crm:P4_has_time_span      @afl:TimeSpan ? ;
  crm:P7_took_place_at      @afl:Place ? ;
- crm:P70i_is_documented_in @afl:SourceOfInformation * ;  
+ crm:P70i_is_documented_in @afl:SourceOfInformation * ;
 }
 
-afl:DeathInformation {                            
- rdf:type                  [ crm:E69_Death ]    ; 
+afl:DeathInformation {
+ rdf:type                  [ crm:E69_Death ]    ;
  crm:P4_has_time_span      @afl:TimeSpan ? ;
  crm:P7_took_place_at      @afl:Place ? ;
- crm:P70i_is_documented_in @afl:SourceOfInformation * ;  
+ crm:P70i_is_documented_in @afl:SourceOfInformation * ;
 }
 
 afl:Gender {
  rdf:type  [ crm:E55_Type ] ;
  afl:label [ afl:gender  ] ;
- afl:value @afl:CL4_Gender 
+ afl:value @afl:CL4_Gender
 }
 
 afl:Profession {
-  rdf:type                  [ crm:E7_Activity ]    ;               
-  crm:P2_has_type           {                                      
+  rdf:type                  [ crm:E7_Activity ]    ;
+  crm:P2_has_type           {
    rdf:type   [ crm:E55_Type ] ;
    afl:label  [ afl:profession ] ;
    afl:value  .
   };
-  # profession - beginning 
+  # profession - beginning
   crm:P4_has_time_span      {
-    rdf:type                  [ crm:E52_Time-Span ] ;              
+    rdf:type                  [ crm:E52_Time-Span ] ;
     afl:label                 [ afl:beginningDate ] + ;
     afl:value                 edtf:EDTF
   } ?   ;
-  
+
   # profession - end
   crm:P4_has_time_span      {
-    rdf:type                  [ crm:E52_Time-Span ] ;              
+    rdf:type                  [ crm:E52_Time-Span ] ;
     afl:label                 [ afl:endDate ]       ;
     afl:value                 edtf:EDTF
    } ?   ;
@@ -210,20 +212,20 @@ afl:Profession {
 }
 
 afl:Activity {
-    rdf:type                  [ crm:E7_Activity ]    ;               
-    crm:P2_has_type           {                                      
-      rdf:type   [ crm:E55_Type ] ;                                  
-      afl:label  [ afl:activity ] 
+    rdf:type                  [ crm:E7_Activity ]    ;
+    crm:P2_has_type           {
+      rdf:type   [ crm:E55_Type ] ;
+      afl:label  [ afl:activity ]
     } ;
-    # activity - beginning 
+    # activity - beginning
     crm:P4_has_time_span      {
-      rdf:type                  [ crm:E52_Time-Span ] ;              
+      rdf:type                  [ crm:E52_Time-Span ] ;
       rdfs:label                [ afl:beginningDate ] ;
       afl:value                 edtf:EDTF
     } ?   ;
     # activity - end
     crm:P4_has_time_span      {
-      rdf:type                  [ crm:E52_Time-Span ] ;              
+      rdf:type                  [ crm:E52_Time-Span ] ;
       rdfs:label                [ afl:endDate ]  ;
       afl:value                 edtf:EDTF
     } ?   ;
@@ -231,31 +233,31 @@ afl:Activity {
 }
 
 afl:Note {
-  rdf:type           [ crm:E62_String ] ;                               
+  rdf:type           [ crm:E62_String ] ;
   crm:P2_has_type    {
-    rdf:type   [ crm:E55_Type ]  ;                                    
+    rdf:type   [ crm:E55_Type ]  ;
     afl:label  [ afl:noteType ] ;
-    afl:value  @afl:CL2_Notes    
+    afl:value  @afl:CL2_Notes
   } + ;
 }
 
-afl:ExternalStandardIdentifier {              
- rdf:type [ crm:E42_Identifier ] ;                                        
+afl:ExternalStandardIdentifier {
+ rdf:type [ crm:E42_Identifier ] ;
  afl:label [ afl:id ] ;
  crm:P2_has_type {
-   rdf:type  [ crm:E55_Type ] ;                                           
-   afl:label [ afl:idSource ] ; 
+   rdf:type  [ crm:E55_Type ] ;
+   afl:label [ afl:idSource ] ;
    afl:value .   # Coded,  open controlled list
  } ;
  afl:value .
 }
 
-afl:InternalStandardIdentifier {                                          
+afl:InternalStandardIdentifier {
   rdf:type [ crm:E89_Propositional_object ] ;
   crm:P48_has_prefered_identifier {
-    rdf:type [  crm:E42_Identifier ]  ;                              
+    rdf:type [  crm:E42_Identifier ]  ;
     afl:value .
-  } ; 
+  } ;
 }
 
 afl:name {
@@ -301,13 +303,13 @@ afl:gender {
 afl:profession {
   rdfs:label [ "Beruf"@de "profession"@en "profession"@fr ] +
 }
-  
+
 afl:sourceInformationType {
-  rdfs:label [ "Quellentyp"@de "type of source"@en "type de source d'information"@fr ] + 
+  rdfs:label [ "Quellentyp"@de "type of source"@en "type de source d'information"@fr ] +
 }
 
 afl:noteType {
-  rdfs:label [ "Notiztyp"@de "note type"@en "type de note"@fr ] + 
+  rdfs:label [ "Notiztyp"@de "note type"@en "type de note"@fr ] +
 }
 
 afl:id {
@@ -315,7 +317,7 @@ afl:id {
 }
 
 afl:idSource {
-  rdfs:label [ "ID Quelle"@de	"ID Source"@en "Source ID"@fr ] + 
+  rdfs:label [ "ID Quelle"@de	"ID Source"@en "Source ID"@fr ] +
 }
 
 afl:beginningDate {
@@ -329,54 +331,54 @@ afl:endDate {
 # This shape is a placeholder to collect annotations that can be used to generate an RDFS vocabulary
 # This feature is experimental because it could be easier to just use an RDFS vocabulary
 afl:Annotations {
- afl:value . 
+ afl:value .
    // a rdf:Property
    // rdfs:label "Value"@en ;
- afl:label . 
-   // a rdf:Property 
-   // rdfs:label "Label"@en 
+ afl:label .
+   // a rdf:Property
+   // rdfs:label "Label"@en
    // rdfs:range afl:Label ;
- afl:sourceOfInformation .  
-   // a afl:Label 
-   // rdfs:label "Source of information"@en ; 
+ afl:sourceOfInformation .
+   // a afl:Label
+   // rdfs:label "Source of information"@en ;
  afl:name .
-   // a afl:Label 
+   // a afl:Label
    // rdfs:label "Name"@en ;
  afl:numeration .
-   // a afl:Label 
+   // a afl:Label
    // rdfs:label "Numeration"@en ;
  afl:title .
-   // a afl:Label 
+   // a afl:Label
    // rdfs:label "Title"@en ;
  afl:alternativeName .
-  // a afl:Label 
+  // a afl:Label
   // rdfs:label "Alternative name"@en ;
  afl:alternativeNumeration .
-  // a afl:Label 
+  // a afl:Label
   // rdfs:label "Alternative numeration"@en ;
  afl:alternativeTitle .
-  // a afl:Label 
+  // a afl:Label
   // rdfs:label "Alternative title"@en ;
  afl:gender .
-  // a afl:Label 
+  // a afl:Label
   // rdfs:label "Gender"@en ;
  afl:profession .
-  // a afl:Label 
+  // a afl:Label
   // rdfs:label "Profession"@en ;
  afl:beginningDate .
-  // a afl:Label 
+  // a afl:Label
   // rdfs:label "Beginning date"@en ;
  afl:endDate .
-  // a afl:Label 
+  // a afl:Label
   // rdfs:label "End date"@en ;
  afl:endDate .
-  // a afl:Label 
-  // rdfs:label "End date"@en ; 
+  // a afl:Label
+  // rdfs:label "End date"@en ;
  afl:id .
-  // a afl:Label 
+  // a afl:Label
   // rdfs:label "ID"@en ;
  afl:idSource .
-  // a afl:Label 
+  // a afl:Label
   // rdfs:label "ID Source"@en ;
  afl:Label .
   // a rdf:Class ;
@@ -385,5 +387,5 @@ afl:Annotations {
  afl:direct .
   // a afl:NameType ;
  afl:indirect .
-  // a afl:NameType ; 
+  // a afl:NameType ;
 }

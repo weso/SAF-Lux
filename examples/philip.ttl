@@ -1,4 +1,4 @@
-# CHANGE LOG 
+# CHANGE LOG
 # 2021-08-02. Changed namespaces of crm, efr and afl
 
 prefix crm:  <http://www.cidoc-crm.org/cidoc-crm/>
@@ -7,7 +7,7 @@ prefix edtf: <http://id.loc.gov/datatypes/edtf>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix :     <http://example.org/>
-prefix afl:  <http://data.culture.lu/ns>
+prefix afl:  <http://data.culture.lu/ns/>
 
 # Example of Philip IV
 # https://en.wikipedia.org/wiki/Philip_IV,_Count_of_Nassau-Weilburg
@@ -37,7 +37,7 @@ prefix afl:  <http://data.culture.lu/ns>
 
 :a2 a crm:E41_Appellation ;
  efr:R8_consists_of :name2, :numeration2, :title2 ;
- crm:P70i_is_documented_in :wikipedia . 
+ crm:P70i_is_documented_in :wikipedia .
 
 :a3 a crm:E41_Appellation ;
  efr:R8_consists_of :name3, :numeration3 ;
@@ -78,9 +78,9 @@ prefix afl:  <http://data.culture.lu/ns>
   afl:value "Weilburg".
 
 :d1 a crm:E69_Death ;
- crm:P4_has_time_span      :d1time    ; 
+ crm:P4_has_time_span      :d1time    ;
  crm:P7_took_place_at      :d1place   ;
- crm:P70i_is_documented_in :wikipedia .  
+ crm:P70i_is_documented_in :wikipedia .
 
 :d1time  a crm:E52_Time-Span ;
  afl:value "1602-03-12"^^edtf:EDTF .
@@ -102,7 +102,7 @@ prefix afl:  <http://data.culture.lu/ns>
 afl:direct a         crm:E55_Type ;
     afl:value "0" .
 
-afl:name rdfs:label "name"@en .    
+afl:name rdfs:label "name"@en .
 afl:title rdfs:label "title"@en .
 afl:numeration rdfs:label "numeration"@en .
 
